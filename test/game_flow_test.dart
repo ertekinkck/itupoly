@@ -8,7 +8,10 @@ import 'package:itupoly_engine/itupoly_engine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  setUp(() => SharedPreferences.setMockInitialValues({}));
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+    GameScreen.disableIntro = true;
+  });
 
   test('controller: oyun başlat ve zar at akışı', () {
     final container = ProviderContainer();

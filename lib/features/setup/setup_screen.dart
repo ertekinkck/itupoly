@@ -136,46 +136,42 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
                 children: [
                   _Header(onBack: () => context.go('/')),
                   Expanded(
-                    child: ListView.separated(
+                    child: SingleChildScrollView(
                       padding: const EdgeInsets.all(AppSpace.lg),
-                      itemCount: _slots.length,
-                      separatorBuilder: (_, __) =>
-                          const SizedBox(height: AppSpace.md),
-                      itemBuilder: (context, i) => _PlayerRow(
-                        slot: _slots[i],
-                        index: i,
-                        canRemove: _slots.length > 2,
-                        onPickPawn: () => _pickPawn(i),
-                        onRemove: () => _remove(i),
-                        onNameChanged: (v) => _slots[i].name = v,
-                        onBotChanged: (v) =>
-                            setState(() => _slots[i].isBot = v),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpace.lg,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            onPressed: _slots.length < 6 ? _add : null,
-                            icon: const Icon(Icons.add_rounded),
-                            label: const Text('Oyuncu ekle'),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          for (var i = 0; i < _slots.length; i++) ...[
+                            _PlayerRow(
+                              slot: _slots[i],
+                              index: i,
+                              canRemove: _slots.length > 2,
+                              onPickPawn: () => _pickPawn(i),
+                              onRemove: () => _remove(i),
+                              onNameChanged: (v) => _slots[i].name = v,
+                              onBotChanged: (v) =>
+                                  setState(() => _slots[i].isBot = v),
+                            ),
+                            const SizedBox(height: AppSpace.md),
+                          ],
+                          const SizedBox(height: AppSpace.sm),
+                          SizedBox(
+                            width: double.infinity,
+                            child: SecondaryButton(
+                              label: 'Oyuncu ekle',
+                              icon: Icons.add_rounded,
+                              onPressed: _slots.length < 6 ? _add : null,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(AppSpace.lg),
-                    child: PrimaryButton(
-                      label: 'Oyunu Başlat',
-                      icon: Icons.sports_esports_rounded,
-                      expand: true,
-                      onPressed: _start,
+                          const SizedBox(height: AppSpace.lg),
+                          PrimaryButton(
+                            label: 'Oyunu Başlat',
+                            icon: Icons.sports_esports_rounded,
+                            expand: true,
+                            onPressed: _start,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

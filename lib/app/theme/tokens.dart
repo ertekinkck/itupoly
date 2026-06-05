@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 
 /// İTÜpoly tasarım jetonları — sade, karanlık, premium.
 abstract final class AppColors {
-  /// Gece laciverti arka plan.
-  static const bg = Color(0xFF0B1220);
-  static const bgElevated = Color(0xFF111A2E);
+  /// Premium açık gri arka plan.
+  static const bg = Color(0xFFF4F6F9);
+  static const bgElevated = Color(0xFFFFFFFF);
 
-  /// Cam yüzey dolgusu ve kenarı.
-  static const glassFill = Color(0x0DFFFFFF); // %5 beyaz
-  static const glassBorder = Color(0x14FFFFFF); // %8 beyaz
-  static const glassStrong = Color(0x1AFFFFFF);
+  /// Cam yüzey dolgusu ve kenarı (açık tema için koyu gölge).
+  static const glassFill = Color(0x0D000000); // %5 siyah
+  static const glassBorder = Color(0x1F000000); // %12 siyah
+  static const glassStrong = Color(0x29000000); // %16 siyah
 
-  /// Arı altını — vurgu.
-  static const accent = Color(0xFFE8B53A);
-  static const accentDim = Color(0xFF8A6B23);
+  /// Altın sarısı — vurgu.
+  static const accent = Color(0xFFD49E00);
+  static const accentDim = Color(0xFFB8860B);
 
   /// Para renkleri.
-  static const positive = Color(0xFF2DD4A7); // zümrüt
-  static const negative = Color(0xFFF0556B);
+  static const positive = Color(0xFF28A745);
+  static const negative = Color(0xFFDC3545);
 
-  static const textPrimary = Color(0xFFF3F5FA);
-  static const textSecondary = Color(0xFFA7B0C0);
-  static const textFaint = Color(0xFF6B7689);
+  static const textPrimary = Color(0xFF0B1220);
+  static const textSecondary = Color(0xFF4A5568);
+  static const textFaint = Color(0xFF8A99AD);
 }
 
 abstract final class AppRadius {
@@ -54,4 +54,4 @@ abstract final class AppBreakpoints {
 }
 
 /// Para birimi simgesi (Kredi).
-const String kCredit = '₭';
+const String kCredit = '₺';

@@ -25,7 +25,7 @@ final class Player {
   final String name;
   final PawnType pawn;
 
-  /// Nakit bakiye (kredi, ₭).
+  /// Nakit bakiye (kredi, ₺).
   final int cash;
 
   /// Bulunduğu kare (0–39).

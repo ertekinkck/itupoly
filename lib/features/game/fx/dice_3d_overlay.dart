@@ -53,58 +53,84 @@ class _Dice3DOverlayState extends State<Dice3DOverlay>
         animation: _c,
         builder: (context, _) {
           final t = _c.value;
-          final scrim = t < 0.85 ? 0.45 : 0.45 * (1 - (t - 0.85) / 0.15);
+          // Very light scrim (nearly transparent) to let the user see the 3D physical dice roll on the board
+          final scrim = t < 0.85 ? 0.12 : 0.12 * (1 - (t - 0.85) / 0.15);
           final settled = t > 0.72;
           final totalOpacity =
               ((t - 0.7) / 0.2).clamp(0.0, 1.0) *
               (t < 0.85 ? 1.0 : (1 - (t - 0.85) / 0.15));
           return Positioned.fill(
-            child: ColoredBox(
-              color: Colors.black.withValues(alpha: scrim.clamp(0.0, 1.0)),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: scrim.clamp(0.0, 1.0)),
+              ),
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        _Die(value: widget.d1, t: t, axis: 1),
-                        const SizedBox(width: 24),
-                        _Die(value: widget.d2, t: t, axis: -1),
-                      ],
-                    ),
-                    const SizedBox(height: 28),
+                    // Removed screen-space floating dice since we now have physical WebGL 3D dice on the board!
+                    const SizedBox(height: 120), // push down slightly to clear board center
                     Opacity(
                       opacity: totalOpacity,
                       child: Column(
                         children: [
-                          Text(
-                            '${widget.d1 + widget.d2}',
-                            style: const TextStyle(
-                              fontSize: 44,
-                              fontWeight: FontWeight.w900,
-                              color: AppColors.textPrimary,
-                              height: 1,
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            decoration: BoxDecoration(
+                              color: AppColors.bg.withValues(alpha: 0.85),
+                              borderRadius: BorderRadius.circular(24),
+                              border: Border.all(color: AppColors.accent.withValues(alpha: 0.3)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(alpha: 0.4),
+                                  blurRadius: 16,
+                                  offset: const Offset(0, 8),
+                                )
+                              ]
+                            ),
+                            child: Column(
+                              children: [
+                                const Text(
+                                  'ZAR TOPLAMI',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w800,
+                                    color: AppColors.textSecondary,
+                                    letterSpacing: 1.5,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  '${widget.d1 + widget.d2}',
+                                  style: const TextStyle(
+                                    fontSize: 48,
+                                    fontWeight: FontWeight.w900,
+                                    color: AppColors.accent,
+                                    height: 1.1,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           if (isDouble && settled)
                             Container(
-                              margin: const EdgeInsets.only(top: 8),
+                              margin: const EdgeInsets.only(top: 16),
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 4,
+                                horizontal: 16,
+                                vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.accent.withValues(alpha: 0.2),
+                                color: AppColors.accent.withValues(alpha: 0.25),
                                 borderRadius: BorderRadius.circular(999),
-                                border: Border.all(color: AppColors.accent),
+                                border: Border.all(color: AppColors.accent, width: 1.5),
                               ),
                               child: const Text(
-                                'ÇİFT! Tekrar at',
+                                'ÇİFT! TEKRAR AT',
                                 style: TextStyle(
                                   color: AppColors.accent,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 1,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 14,
+                                  letterSpacing: 1.2,
                                 ),
                               ),
                             ),

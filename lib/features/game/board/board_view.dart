@@ -180,24 +180,17 @@ class _BoardViewState extends State<BoardView>
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(tile * 0.4),
                               gradient: const RadialGradient(
-                                colors: [Color(0xFF13203B), AppColors.bg],
+                                colors: [Colors.white, AppColors.bg],
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.6),
-                                  blurRadius: 40,
-                                  offset: const Offset(0, 30),
+                                  color: Colors.black.withValues(alpha: 0.12),
+                                  blurRadius: 30,
+                                  offset: const Offset(0, 15),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        Positioned(
-                          left: tile,
-                          top: tile,
-                          width: side - 2 * tile,
-                          height: side - 2 * tile,
-                          child: const _BoardCenter(),
                         ),
                         for (var i = 0; i < boardSize; i++)
                           _positionedTile(i, tile, highlight),
@@ -237,36 +230,6 @@ class _BoardViewState extends State<BoardView>
           ownerColor: ownerColor,
           highlighted: i == highlight,
           onTap: () => widget.onTapTile(i),
-        ),
-      ),
-    );
-  }
-}
-
-/// Tahtanın ortasında dik duran amblem (3B merkez parça).
-class _BoardCenter extends StatelessWidget {
-  const _BoardCenter();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Transform(
-        alignment: Alignment.bottomCenter,
-        transform: Matrix4.identity()..rotateX(-boardTilt),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              'assets/images/emblem.png',
-              width: 120,
-              height: 120,
-              errorBuilder: (context, _, __) => Icon(
-                Icons.hive_rounded,
-                color: AppColors.accent.withValues(alpha: 0.6),
-                size: 60,
-              ),
-            ),
-          ],
         ),
       ),
     );

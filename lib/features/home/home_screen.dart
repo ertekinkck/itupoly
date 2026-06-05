@@ -14,6 +14,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hasSave = ref.watch(hasSaveProvider);
+    final isShort = MediaQuery.of(context).size.height < 550;
 
     return Scaffold(
       body: AppBackground(
@@ -26,9 +27,9 @@ class HomeScreen extends ConsumerWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: AppSpace.xl),
-                    const BrandMark(size: 1.1),
-                    const SizedBox(height: AppSpace.sm),
+                    SizedBox(height: isShort ? AppSpace.md : AppSpace.xl),
+                    BrandMark(size: isShort ? 0.8 : 1.1),
+                    SizedBox(height: isShort ? AppSpace.xs : AppSpace.sm),
                     const Text(
                       'Kampüsü ele geçir, rakiplerini mezun etme.',
                       textAlign: TextAlign.center,
@@ -37,14 +38,14 @@ class HomeScreen extends ConsumerWidget {
                         fontSize: 15,
                       ),
                     ),
-                    const SizedBox(height: AppSpace.xl),
+                    SizedBox(height: isShort ? AppSpace.md : AppSpace.xl),
                     PrimaryButton(
                       label: 'Yeni Oyun',
                       icon: Icons.play_arrow_rounded,
                       expand: true,
                       onPressed: () => context.go('/kurulum'),
                     ),
-                    const SizedBox(height: AppSpace.md),
+                    SizedBox(height: isShort ? AppSpace.sm : AppSpace.md),
                     hasSave.maybeWhen(
                       data: (has) => has
                           ? _MenuButton(
@@ -62,13 +63,13 @@ class HomeScreen extends ConsumerWidget {
                           : const SizedBox.shrink(),
                       orElse: () => const SizedBox.shrink(),
                     ),
-                    const SizedBox(height: AppSpace.md),
+                    SizedBox(height: isShort ? AppSpace.sm : AppSpace.md),
                     _MenuButton(
                       label: 'Nasıl Oynanır',
                       icon: Icons.help_outline_rounded,
                       onPressed: () => context.go('/nasil-oynanir'),
                     ),
-                    const SizedBox(height: AppSpace.xl),
+                    SizedBox(height: isShort ? AppSpace.md : AppSpace.xl),
                     const Text(
                       'Pass & play • 2–6 oyuncu • bota karşı',
                       style: TextStyle(

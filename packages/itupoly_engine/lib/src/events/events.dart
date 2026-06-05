@@ -175,7 +175,7 @@ final class SalaryPaid extends GameEvent {
   };
   @override
   String describe(List<Player> players) =>
-      "${GameEvent._name(players, playerId)} BAŞLA'dan geçti, +$amount₭ burs";
+      "${GameEvent._name(players, playerId)} BAŞLA'dan geçti, +$amount₺ burs";
 }
 
 final class PropertyBought extends GameEvent {
@@ -199,7 +199,7 @@ final class PropertyBought extends GameEvent {
   @override
   String describe(List<Player> players) =>
       '${GameEvent._name(players, playerId)} '
-      '${boardTr[tileIndex].name} aldı (-$price₭)';
+      '${boardTr[tileIndex].name} aldı (-$price₺)';
 }
 
 final class BuyDeclined extends GameEvent {
@@ -244,7 +244,7 @@ final class RentPaid extends GameEvent {
   @override
   String describe(List<Player> players) =>
       '${GameEvent._name(players, fromId)} → '
-      '${GameEvent._name(players, toId)}: $amount₭ kira '
+      '${GameEvent._name(players, toId)}: $amount₺ kira '
       '(${boardTr[tileIndex].name})';
 }
 
@@ -262,7 +262,7 @@ final class TaxPaid extends GameEvent {
   };
   @override
   String describe(List<Player> players) =>
-      '${GameEvent._name(players, playerId)} vergi ödedi (-$amount₭)';
+      '${GameEvent._name(players, playerId)} vergi ödedi (-$amount₺)';
 }
 
 final class MoneyChanged extends GameEvent {
@@ -288,7 +288,7 @@ final class MoneyChanged extends GameEvent {
   @override
   String describe(List<Player> players) {
     final sign = delta >= 0 ? '+' : '';
-    return '${GameEvent._name(players, playerId)}: $sign$delta₭ ($reason)';
+    return '${GameEvent._name(players, playerId)}: $sign$delta₺ ($reason)';
   }
 }
 
@@ -316,7 +316,7 @@ final class MoneyTransferred extends GameEvent {
   @override
   String describe(List<Player> players) =>
       '${GameEvent._name(players, fromId)} → '
-      '${GameEvent._name(players, toId)}: $amount₭ ($reason)';
+      '${GameEvent._name(players, toId)}: $amount₺ ($reason)';
 }
 
 final class CardDrawn extends GameEvent {
@@ -371,7 +371,7 @@ final class HouseBuilt extends GameEvent {
   @override
   String describe(List<Player> players) {
     final what = houses == 5 ? 'amfi' : '$houses. derslik';
-    return '${boardTr[tileIndex].name}: $what inşa edildi (-$cost₭)';
+    return '${boardTr[tileIndex].name}: $what inşa edildi (-$cost₺)';
   }
 }
 
@@ -395,7 +395,7 @@ final class HouseSold extends GameEvent {
   };
   @override
   String describe(List<Player> players) =>
-      '${boardTr[tileIndex].name}: inşaat satıldı (+$refund₭)';
+      '${boardTr[tileIndex].name}: inşaat satıldı (+$refund₺)';
 }
 
 final class Mortgaged extends GameEvent {
@@ -412,7 +412,7 @@ final class Mortgaged extends GameEvent {
   };
   @override
   String describe(List<Player> players) =>
-      '${boardTr[tileIndex].name} ipotek edildi (+$amount₭)';
+      '${boardTr[tileIndex].name} ipotek edildi (+$amount₺)';
 }
 
 final class Unmortgaged extends GameEvent {
@@ -429,7 +429,7 @@ final class Unmortgaged extends GameEvent {
   };
   @override
   String describe(List<Player> players) =>
-      '${boardTr[tileIndex].name} ipoteği kaldırıldı (-$amount₭)';
+      '${boardTr[tileIndex].name} ipoteği kaldırıldı (-$amount₺)';
 }
 
 final class SentToDisiplin extends GameEvent {
@@ -530,7 +530,7 @@ final class DebtIncurred extends GameEvent {
   };
   @override
   String describe(List<Player> players) =>
-      '${GameEvent._name(players, playerId)} $amount₭ ödeyemiyor — '
+      '${GameEvent._name(players, playerId)} $amount₺ ödeyemiyor — '
       'tasfiye gerekli';
 }
 

@@ -4,7 +4,7 @@ import 'package:itupoly/app/theme/tokens.dart';
 
 /// Uygulama teması — Manrope tipografisi, karanlık premium palet.
 ThemeData buildAppTheme() {
-  final base = ThemeData.dark(useMaterial3: true);
+  final base = ThemeData.light(useMaterial3: true);
   final textTheme = GoogleFonts.manropeTextTheme(base.textTheme).apply(
     bodyColor: AppColors.textPrimary,
     displayColor: AppColors.textPrimary,
@@ -12,10 +12,10 @@ ThemeData buildAppTheme() {
 
   return base.copyWith(
     scaffoldBackgroundColor: AppColors.bg,
-    colorScheme: const ColorScheme.dark(
+    colorScheme: const ColorScheme.light(
       surface: AppColors.bg,
       primary: AppColors.accent,
-      onPrimary: AppColors.bg,
+      onPrimary: Colors.white,
       secondary: AppColors.positive,
       error: AppColors.negative,
     ),
@@ -24,7 +24,7 @@ ThemeData buildAppTheme() {
     highlightColor: AppColors.accent.withValues(alpha: 0.04),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: AppColors.bgElevated,
-      contentTextStyle: textTheme.bodyMedium,
+      contentTextStyle: textTheme.bodyMedium?.copyWith(color: AppColors.textPrimary),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.button),

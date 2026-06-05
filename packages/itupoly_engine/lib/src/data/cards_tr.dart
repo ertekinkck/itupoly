@@ -6,13 +6,13 @@ const List<GameCard> sansCards = [
   GameCard(
     id: 0,
     deck: DeckType.sans,
-    text: 'Bütünlemeye kaldın — 100₭ öde.',
+    text: 'Bütünlemeye kaldın — 100₺ öde.',
     action: PayMoney(100),
   ),
   GameCard(
     id: 1,
     deck: DeckType.sans,
-    text: 'TÜBİTAK bursu onaylandı — 150₭ al.',
+    text: 'TÜBİTAK bursu onaylandı — 150₺ al.',
     action: GainMoney(150),
   ),
   GameCard(
@@ -36,13 +36,13 @@ const List<GameCard> sansCards = [
   GameCard(
     id: 5,
     deck: DeckType.sans,
-    text: 'Yüksek onur belgesi — 100₭ al.',
+    text: 'Yüksek onur belgesi — 100₺ al.',
     action: GainMoney(100),
   ),
   GameCard(
     id: 6,
     deck: DeckType.sans,
-    text: 'Staj maaşın yattı — 50₭ al.',
+    text: 'Staj maaşın yattı — 50₺ al.',
     action: GainMoney(50),
   ),
   GameCard(
@@ -54,7 +54,7 @@ const List<GameCard> sansCards = [
   GameCard(
     id: 8,
     deck: DeckType.sans,
-    text: 'Laboratuvar cihazını bozdun — 75₭ öde.',
+    text: 'Laboratuvar cihazını bozdun — 75₺ öde.',
     action: PayMoney(75),
   ),
   GameCard(
@@ -66,7 +66,7 @@ const List<GameCard> sansCards = [
   GameCard(
     id: 10,
     deck: DeckType.sans,
-    text: 'Şenlikte herkese çay ısmarladın — her oyuncuya 25₭ öde.',
+    text: 'Şenlikte herkese çay ısmarladın — her oyuncuya 25₺ öde.',
     action: PayEach(25),
   ),
   GameCard(
@@ -78,7 +78,7 @@ const List<GameCard> sansCards = [
   GameCard(
     id: 12,
     deck: DeckType.sans,
-    text: 'Vize haftası kantinde fazla harcadın — 60₭ öde.',
+    text: 'Vize haftası kantinde fazla harcadın — 60₺ öde.',
     action: PayMoney(60),
   ),
   GameCard(
@@ -90,7 +90,7 @@ const List<GameCard> sansCards = [
   GameCard(
     id: 14,
     deck: DeckType.sans,
-    text: 'Proje yarışması büyük ödülü — 200₭ al.',
+    text: 'Proje yarışması büyük ödülü — 200₺ al.',
     action: GainMoney(200),
   ),
   GameCard(
@@ -106,25 +106,25 @@ const List<GameCard> kampusCards = [
   GameCard(
     id: 0,
     deck: DeckType.kampusKarti,
-    text: 'Dönem projesi ödülü — 100₭ al.',
+    text: 'Dönem projesi ödülü — 100₺ al.',
     action: GainMoney(100),
   ),
   GameCard(
     id: 1,
     deck: DeckType.kampusKarti,
-    text: 'Kütüphane gecikme cezası — 30₭ öde.',
+    text: 'Kütüphane gecikme cezası — 30₺ öde.',
     action: PayMoney(30),
   ),
   GameCard(
     id: 2,
     deck: DeckType.kampusKarti,
-    text: 'Mezuniyet fotoğrafı — her oyuncudan 10₭ al.',
+    text: 'Mezuniyet fotoğrafı — her oyuncudan 10₺ al.',
     action: CollectFromEach(10),
   ),
   GameCard(
     id: 3,
     deck: DeckType.kampusKarti,
-    text: "Kayıt yenileme zamanı — BAŞLA'ya ilerle, 200₭ al.",
+    text: "Kayıt yenileme zamanı — BAŞLA'ya ilerle, 200₺ al.",
     action: MoveTo(0),
   ),
   GameCard(
@@ -136,25 +136,25 @@ const List<GameCard> kampusCards = [
   GameCard(
     id: 5,
     deck: DeckType.kampusKarti,
-    text: 'Yemekhane iadesi — 50₭ al.',
+    text: 'Yemekhane iadesi — 50₺ al.',
     action: GainMoney(50),
   ),
   GameCard(
     id: 6,
     deck: DeckType.kampusKarti,
-    text: 'Laptopun arızalandı, tamir — 100₭ öde.',
+    text: 'Laptopun arızalandı, tamir — 100₺ öde.',
     action: PayMoney(100),
   ),
   GameCard(
     id: 7,
     deck: DeckType.kampusKarti,
-    text: 'Topluluk standında bağış topladın — 25₭ al.',
+    text: 'Topluluk standında bağış topladın — 25₺ al.',
     action: GainMoney(25),
   ),
   GameCard(
     id: 8,
     deck: DeckType.kampusKarti,
-    text: 'Fotokopi borcun birikti — 50₭ öde.',
+    text: 'Fotokopi borcun birikti — 50₺ öde.',
     action: PayMoney(50),
   ),
   GameCard(
@@ -166,37 +166,37 @@ const List<GameCard> kampusCards = [
   GameCard(
     id: 10,
     deck: DeckType.kampusKarti,
-    text: 'Bölüm birinciliği bursu — 150₭ al.',
+    text: 'Bölüm birinciliği bursu — 150₺ al.',
     action: GainMoney(150),
   ),
   GameCard(
     id: 11,
     deck: DeckType.kampusKarti,
-    text: 'Kan bağışı teşekkür çeki — 20₭ al.',
+    text: 'Kan bağışı teşekkür çeki — 20₺ al.',
     action: GainMoney(20),
   ),
   GameCard(
     id: 12,
     deck: DeckType.kampusKarti,
-    text: 'Ulaşım kartına yükleme — 40₭ öde.',
+    text: 'Ulaşım kartına yükleme — 40₺ öde.',
     action: PayMoney(40),
   ),
   GameCard(
     id: 13,
     deck: DeckType.kampusKarti,
-    text: 'Asistanlık ücreti — 75₭ al.',
+    text: 'Asistanlık ücreti — 75₺ al.',
     action: GainMoney(75),
   ),
   GameCard(
     id: 14,
     deck: DeckType.kampusKarti,
-    text: 'Mezuniyet pastası ısmarladın — her oyuncuya 15₭ öde.',
+    text: 'Mezuniyet pastası ısmarladın — her oyuncuya 15₺ öde.',
     action: PayEach(15),
   ),
   GameCard(
     id: 15,
     deck: DeckType.kampusKarti,
-    text: 'Harç fazlası iadesi — 100₭ al.',
+    text: 'Harç fazlası iadesi — 100₺ al.',
     action: GainMoney(100),
   ),
 ];

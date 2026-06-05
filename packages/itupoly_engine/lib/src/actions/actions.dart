@@ -79,7 +79,7 @@ final class UnmortgageTile extends PlayerAction {
   Map<String, dynamic> toJson() => {'type': 'unmortgage', 'tile': tileIndex};
 }
 
-/// Disiplin Kurulu çıkış cezasını öde (50₭).
+/// Disiplin Kurulu çıkış cezasını öde (50₺).
 final class PayDisiplinFine extends PlayerAction {
   const PayDisiplinFine();
   @override

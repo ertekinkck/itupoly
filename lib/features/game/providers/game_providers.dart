@@ -7,6 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:itupoly_engine/itupoly_engine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Rastgele gecikme üreteci (bot için).
+final _rng = Random();
+
 /// UI'nın izlediği oturum: motor state'i + son event'ler (FX) + olay günlüğü.
 class GameSession {
   const GameSession({
@@ -35,7 +38,9 @@ class GameSession {
 }
 
 const _saveKey = 'itupoly_save_v1';
-const _botStepDelay = Duration(milliseconds: 750);
+// Bot temel bekleme süresi: 2500–4500 ms arası rastgele (insan gibi).
+Duration _randomBotDelay() =>
+    Duration(milliseconds: 2500 + _rng.nextInt(2000));
 
 /// Oyun denetleyicisi — engine ile UI arasındaki tek köprü.
 class GameController extends Notifier<GameSession?> {
@@ -59,9 +64,9 @@ class GameController extends Notifier<GameSession?> {
 
   bool get currentIsBot {
     final s = state;
-    return s != null &&
-        s.state.phase != TurnPhase.gameOver &&
-        _isBot[s.state.currentPlayerIndex];
+    if (s == null || s.state.phase == TurnPhase.gameOver) return false;
+    final idx = s.state.currentPlayerIndex;
+    return idx < _isBot.length && _isBot[idx];
   }
 
   GameEngine get engine {
@@ -76,6 +81,7 @@ class GameController extends Notifier<GameSession?> {
 
   /// Yeni oyun başlat.
   void startNew(List<PlayerSetup> setups, {int? seed}) {
+    _botTimer?.cancel();
     _seed = seed ?? Random().nextInt(0x7FFFFFFF);
     _engine = GameEngine(Random(_seed));
     _setups = setups;
@@ -88,7 +94,7 @@ class GameController extends Notifier<GameSession?> {
   }
 
   /// İnsan oyuncunun aksiyonunu uygula.
-  void dispatch(PlayerAction action) {
+  Future<void> dispatch(PlayerAction action) async {
     final sess = state;
     final engine = _engine;
     if (sess == null || engine == null) return;
@@ -115,14 +121,37 @@ class GameController extends Notifier<GameSession?> {
         : merged;
 
     state = sess.copyWith(state: next, lastEvents: events, log: trimmed);
-    unawaited(_persist());
-    _scheduleBotIfNeeded();
+    // Oyun bittiyse kaydı hemen bekle (race condition'ı önler).
+    if (next.phase == TurnPhase.gameOver) {
+      await _persist();
+    } else {
+      unawaited(_persist());
+    }
+    _scheduleBotIfNeeded(action);
   }
 
-  void _scheduleBotIfNeeded() {
+  void _scheduleBotIfNeeded([PlayerAction? lastAction]) {
     _botTimer?.cancel();
     if (!currentIsBot) return;
-    _botTimer = Timer(_botStepDelay, () {
+
+    Duration delay;
+    if (lastAction is RollDice) {
+      final s = state?.state;
+      if (s != null && s.lastDie1 > 0 && s.lastDie2 > 0) {
+        final diceSum = s.lastDie1 + s.lastDie2;
+        // Zar overlay (1600ms) + piyon hareketi (140ms * adım) + 400ms buffer
+        // + insanın düşünme süresi (1500-3000ms)
+        final thinkMs = 1500 + _rng.nextInt(1500);
+        delay = Duration(milliseconds: 1600 + diceSum * 140 + 400 + thinkMs);
+      } else {
+        delay = _randomBotDelay();
+      }
+    } else {
+      // Zar dışı kararlar: satın al/pas/tur bitir gibi — yine rasgele gecikme.
+      delay = _randomBotDelay();
+    }
+
+    _botTimer = Timer(delay, () {
       if (_disposed) return;
       if (!currentIsBot) return;
       final sess = state;

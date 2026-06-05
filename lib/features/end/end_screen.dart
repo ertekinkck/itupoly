@@ -26,6 +26,7 @@ class EndScreen extends ConsumerWidget {
         ? s.playerById(s.winnerId!)
         : ranked.first;
     final maxWorth = netWorth(s, ranked.first.id).clamp(1, 1 << 30);
+    final isShort = MediaQuery.of(context).size.height < 550;
 
     return Scaffold(
       body: AppBackground(
@@ -38,17 +39,17 @@ class EndScreen extends ConsumerWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: AppSpace.lg),
-                    const Icon(
+                    SizedBox(height: isShort ? AppSpace.sm : AppSpace.lg),
+                    Icon(
                       Icons.emoji_events_rounded,
                       color: AppColors.accent,
-                      size: 64,
+                      size: isShort ? 48 : 64,
                     ),
-                    const SizedBox(height: AppSpace.md),
+                    SizedBox(height: isShort ? AppSpace.sm : AppSpace.md),
                     Text(
                       '${winner.name} mezun oldu!',
-                      style: const TextStyle(
-                        fontSize: 26,
+                      style: TextStyle(
+                        fontSize: isShort ? 22 : 26,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -57,7 +58,7 @@ class EndScreen extends ConsumerWidget {
                       'En yüksek net değerle kazandı',
                       style: TextStyle(color: AppColors.textSecondary),
                     ),
-                    const SizedBox(height: AppSpace.xl),
+                    SizedBox(height: isShort ? AppSpace.md : AppSpace.xl),
                     GlassCard(
                       child: Column(
                         children: [
@@ -72,14 +73,14 @@ class EndScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: AppSpace.xl),
+                    SizedBox(height: isShort ? AppSpace.md : AppSpace.xl),
                     PrimaryButton(
                       label: 'Tekrar Oyna',
                       icon: Icons.replay_rounded,
                       expand: true,
                       onPressed: () => context.go('/kurulum'),
                     ),
-                    const SizedBox(height: AppSpace.md),
+                    SizedBox(height: isShort ? AppSpace.sm : AppSpace.md),
                     SecondaryButton(
                       label: 'Ana Menü',
                       icon: Icons.home_rounded,

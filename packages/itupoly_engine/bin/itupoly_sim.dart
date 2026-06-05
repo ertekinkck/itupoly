@@ -59,10 +59,10 @@ void main(List<String> args) {
   stdout.writeln('\nSıralama (net değer):');
   for (final p in standings) {
     final mark = p.id == result.finalState.winnerId ? '🎓' : '  ';
-    final status = p.bankrupt ? 'İFLAS' : '${p.cash}₭ nakit';
+    final status = p.bankrupt ? 'İFLAS' : '${p.cash}₺ nakit';
     stdout.writeln(
       '$mark ${p.name.padRight(8)} '
-      'net ${netWorth(result.finalState, p.id)}₭  ($status)',
+      'net ${netWorth(result.finalState, p.id)}₺  ($status)',
     );
   }
 }

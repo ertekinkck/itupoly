@@ -577,6 +577,9 @@ class GameEngine {
     }
     final player = t.state.currentPlayer;
     final index = player.position;
+    if (t.state.tileStateAt(index).isOwned) {
+      throw RuleViolation('Mülk zaten sahipli');
+    }
     final price = boardTr[index].purchasePrice;
     if (player.cash < price) throw RuleViolation('Yeterli nakit yok');
     t.emit(
@@ -728,7 +731,7 @@ class GameEngine {
     if (active.length <= 1) {
       final winner = active.isNotEmpty
           ? active.first.id
-          : t.state.currentPlayer.id;
+          : _richestAmongAll(t.state);
       t.emit(GameEnded(winner));
       t.state = t.state.copyWith(winnerId: winner);
       t.setPhase(TurnPhase.gameOver);
@@ -742,8 +745,17 @@ class GameEngine {
       return;
     }
     var idx = t.state.currentPlayerIndex;
+    var safety = 0;
     do {
       idx = (idx + 1) % t.state.players.length;
+      safety++;
+      if (safety > t.state.players.length) {
+        final winner = _richestAmongAll(t.state);
+        t.emit(GameEnded(winner));
+        t.state = t.state.copyWith(winnerId: winner);
+        t.setPhase(TurnPhase.gameOver);
+        return;
+      }
     } while (t.state.players[idx].bankrupt);
     final next = t.state.players[idx];
     t.emit(TurnStarted(next.id));
@@ -760,6 +772,17 @@ class GameEngine {
       return cmp != 0 ? cmp : a.id.compareTo(b.id);
     });
     return active.first.id;
+  }
+
+  /// Tüm oyuncular arasından (iflas etmiş dahil) en yüksek net değere sahip
+  /// olan — tüm aktif oyuncular iflas ettiğinde kazananı belirler.
+  int _richestAmongAll(GameState s) {
+    final all = List.of(s.players);
+    all.sort((a, b) {
+      final cmp = netWorth(s, b.id).compareTo(netWorth(s, a.id));
+      return cmp != 0 ? cmp : a.id.compareTo(b.id);
+    });
+    return all.first.id;
   }
 
   void _checkTileIndex(int index) {

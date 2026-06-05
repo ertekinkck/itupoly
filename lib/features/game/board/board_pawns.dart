@@ -82,7 +82,7 @@ class _BoardPawnsState extends State<BoardPawns> with TickerProviderStateMixin {
   Offset _clusterOffset(int id) {
     final col = id % 3 - 1;
     final row = id ~/ 3 - 0.5;
-    return Offset(col * widget.tile * 0.20, row * widget.tile * 0.24);
+    return Offset(col * widget.tile * 0.30, row * widget.tile * 0.32);
   }
 
   @override

@@ -238,7 +238,8 @@ GameState _bankrupt(GameState state, int playerId, int? toPlayerId) {
   if (toPlayerId != null && cIdx != -1) {
     players[cIdx] = players[cIdx].copyWith(cash: players[cIdx].cash + p.cash);
     for (final i in props) {
-      tiles[i] = tiles[i].copyWith(ownerId: toPlayerId);
+      // İpotek durumu transfer sırasında sıfırlanır (Monopoly kuralı).
+      tiles[i] = tiles[i].copyWith(ownerId: toPlayerId, mortgaged: false);
     }
   } else {
     bankDelta += p.cash;
