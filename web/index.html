@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="İTÜpoly — İTÜ temalı, linkle girilen emlak ticareti masa oyunu. 2–6 oyuncu, pass & play, bota karşı.">
+  <meta name="theme-color" content="#0B1220">
+
+  <!-- Open Graph (WhatsApp / sosyal önizleme) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="İTÜpoly">
+  <meta property="og:description" content="Kampüsü ele geçir, rakiplerini mezun etme. İTÜ temalı emlak ticareti masa oyunu — linke tıkla, oyna.">
+  <meta property="og:image" content="og-image.png">
+  <meta property="og:locale" content="tr_TR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="İTÜpoly">
+  <meta name="twitter:description" content="Kampüsü ele geçir, rakiplerini mezun etme.">
+  <meta name="twitter:image" content="og-image.png">
+
+  <!-- iOS / PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="İTÜpoly">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>İTÜpoly</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- three.js (gerçek 3B tahta) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="three/board3d.js"></script>
+
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background-color: #0B1220; }
+    /* Markalı splash — Flutter yüklenene kadar görünür. */
+    #splash {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 20px;
+      background: radial-gradient(circle at 50% 35%, #15203A 0%, #0B1220 70%);
+      z-index: 9999; transition: opacity 0.4s ease;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    #splash img { width: 112px; height: 112px; border-radius: 26px;
+      box-shadow: 0 0 40px rgba(232,181,58,0.35); }
+    #splash .title { color: #F3F5FA; font-size: 30px; font-weight: 800; letter-spacing: -1px; }
+    #splash .title span { color: #E8B53A; }
+    #splash .sub { color: #6B7689; font-size: 13px; margin-top: -8px; }
+    #splash .bar { width: 120px; height: 3px; border-radius: 3px; overflow: hidden;
+      background: rgba(255,255,255,0.08); margin-top: 8px; }
+    #splash .bar i { display: block; height: 100%; width: 40%; background: #E8B53A;
+      border-radius: 3px; animation: load 1.1s ease-in-out infinite; }
+    @keyframes load { 0% { margin-left: -40%; } 100% { margin-left: 100%; } }
+  </style>
+</head>
+<body>
+  <div id="splash">
+    <img src="icons/Icon-512.png" alt="İTÜpoly">
+    <div class="title">İTÜ<span>poly</span></div>
+    <div class="sub">Kampüsü ele geçir</div>
+    <div class="bar"><i></i></div>
+  </div>
+  <script>
+    // Flutter ilk kareyi çizince splash'i kaldır.
+    window.addEventListener('flutter-first-frame', function () {
+      var s = document.getElementById('splash');
+      if (s) { s.style.opacity = '0'; setTimeout(function(){ s.remove(); }, 400); }
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

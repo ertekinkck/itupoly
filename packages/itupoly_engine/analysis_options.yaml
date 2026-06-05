@@ -1,0 +1,26 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-raw-types: true
+  errors:
+    # Bu paket bir kütüphane değil oyun motoru; her public üye için doc zorunlu değil.
+    public_member_api_docs: ignore
+    lines_longer_than_80_chars: ignore
+    flutter_style_todos: ignore
+    cascade_invocations: ignore
+    avoid_positional_boolean_parameters: ignore
+    one_member_abstracts: ignore
+    comment_references: ignore
+    specify_nonobvious_property_types: ignore
+    avoid_redundant_argument_values: ignore
+    avoid_escaping_inner_quotes: ignore
+    join_return_with_assignment: ignore
+
+linter:
+  rules:
+    public_member_api_docs: false
+    lines_longer_than_80_chars: false
+    sort_constructors_first: false
+    always_put_required_named_parameters_first: false
